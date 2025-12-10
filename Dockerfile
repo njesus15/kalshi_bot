@@ -20,5 +20,10 @@ RUN poetry config virtualenvs.create false \
 # Now copy your actual code
 COPY kalshi_bot ./kalshi_bot
 
+COPY pyproject.toml .   # ← add this line (important!)
+
+# Install the actual kalshi_bot package (this fixes the import!)
+RUN pip install -e .
+
 # Run the bot
 CMD ["python", "-m", "kalshi_bot.core.client"]

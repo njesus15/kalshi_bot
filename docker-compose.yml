@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   kalshi_bot:
-    image: njesus45/kalshi_bot:latest     # ← Docker Hub
+    image: njesus45/kalshi-bot:latest     # ← Docker Hub
     restart: unless-stopped
     ports:
       - "80:8000"                  # or 443:8000 if you add HTTPS later
