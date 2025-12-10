@@ -15,11 +15,9 @@ from kalshi_bot.core.data.order_book import OrderBook
 from kalshi_bot.core.delta_recorder import DeltaRecorder
 from kalshi_bot.strategy.sweep import Sweep
 from kalshi_bot.util.util import get_signed_headers, get_nba_sport_markets
+from kalshi_bot.util.load_credential import load_credentials
 from kalshi_bot.util.logger import get_logger
 
-
-KALSHI_EMAIL = "navarrojes.me@gmail.com"      # ← put yours here or use env var
-KALSHI_PASSWORD = "Jayzuz321_"
 TARGET_TICKER = "KXNFLGAME-25DEC04DALDET-DET"
 
 LOGIN_URL = "https://api.kalshi.com/trade/api/v2/login"
@@ -28,9 +26,9 @@ WS_URL = "wss://live-api-v2.kalshi.com/trade/api/v2/ws"
 logger = get_logger('kalshi_client')
 
 class KalshiClient:
-    def __init__(self, api_key: str, private_key_path: str):
+    def __init__(self, api_key: str, pk: str):
         self.api_key = api_key
-        self.private_key_path = private_key_path
+        self.pk = pk
         self.ws_url = "wss://api.elections.kalshi.com/trade-api/ws/v2"
         self.on_update = lambda x: None
         self.sweep = Sweep()
@@ -43,8 +41,7 @@ class KalshiClient:
 
     def _auth_headers(self) -> Dict[str, str]:
         """Generate correct WebSocket auth headers (PKCS1v15, ms timestamp)."""
-        with open(self.private_key_path, "rb") as f:
-            private_key = serialization.load_pem_private_key(f.read(), password=None)
+        private_key = serialization.load_pem_private_key(self.pk)
         
         timestamp = str(int(time.time() * 1000))  # Milliseconds!
         payload = timestamp + "GET" + "/trade-api/ws/v2"  # Exact payload for connect
@@ -162,9 +159,10 @@ class KalshiClient:
             print(f"📨 Other: {data}")
 
 if __name__ == "__main__":
+    api_key, pk = load_credentials()
     client = KalshiClient(
-        api_key="7f738424-1cd7-403e-a6b8-f81e059121be",
-        private_key_path="/Users/jesus/github/kalshi_bot/kalshi_bot/analysis/kalshi.pk"
+        api_key=api_key,
+        private_key_path=pk
     )
     #client.on_update = on_price_update
     asyncio.run(client.start())

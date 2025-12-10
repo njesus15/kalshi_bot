@@ -15,6 +15,7 @@ pandas = "^2.3.3"
 cryptography = "41.0.7"
 colorlog = "^6.10.1"
 pyarrow = "^22.0.0"
+tomli = "^2.3.0"
 
 
 [build-system]
