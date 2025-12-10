@@ -1,0 +1,146 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.ruff_cache/
+
+# Virtual Environment
+.venv*/
+venv*/
+ENV*/
+
+# IDEs / Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Secrets & Credentials (CRITICAL — NEVER commit this!)
+.env
+.env.local
+.env.*.local
+secrets/
+*.pem
+*.key
+*.crt
+*.cer
+*.der
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.p8
+*.pkcs12
+*.p7b
+*.p7s
+*.pem/
+keys/
+certs/
+*.secret
+*.token
+*.password
+
+# Kalshi-specific
+kalshi.pk
+*.pk
+*.pem
+*.key
+*.json  # if it has keys
+
+# Data / Logs
+*.parquet
+*.csv
+*.jsonl
+*.log
+logs/
+kalshi_deltas/
+data/
+output/
+__temp__/
+
+# Build / Dist
+build/
+dist/
+*.egg-info/
+*.egg
+*.eggs/
+*.dist-info/
+*.whl
+
+# Testing
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+*.py,cover
+.pytest_cache/
+test-results/
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Mac/OSX
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Misc
+*.bak
+*.tmp
+*.temp
+*.swp
+*~
+
+# NEVER commit these — Kalshi will ban you instantly if leaked
+kalshi.pk
+*.pk
+*.pem
+*.key
+secrets/
+secrets/
+.env

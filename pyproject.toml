@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "kalshi-bot"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+packages = [{include = "kalshi_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "2.31.0"
+urllib3 = "1.26.18"
+websockets = "12.0"
+pandas = "^2.3.3"
+cryptography = "41.0.7"
+colorlog = "^6.10.1"
+pyarrow = "^22.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
