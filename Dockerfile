@@ -1,15 +1,24 @@
-# Dockerfile — build and run your bot in one image
+# Dockerfile — copy-paste exactly
 FROM python:3.11-slim
 
-# Set work dir
+ENV PYTHONUNBUFFERED=1 \
+    PIP_NO_CACHE_DIR=1
+
 WORKDIR /app
 
-# Copy poetry files + code
+# Install Poetry
+RUN pip install --no-cache-dir poetry
+
+# Copy only dependency files first (for layer caching)
 COPY pyproject.toml poetry.lock ./
+
+# Install dependencies WITHOUT installing your project as a package
+# This avoids the "Readme path does not exist" error
+RUN poetry config virtualenvs.create false \
+    && poetry install --only main --no-interaction --no-ansi --no-root
+
+# Now copy your actual code
 COPY kalshi_bot ./kalshi_bot
 
-# Install deps with poetry
-RUN pip install poetry && poetry install --no-dev
-
 # Run the bot
-ENTRYPOINT ["poetry", "run", "python", "kalshi_bot/core/client.py"]
+CMD ["python", "-m", "kalshi_bot.core.client"]
