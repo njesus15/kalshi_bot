@@ -41,7 +41,7 @@ class KalshiClient:
 
     def _auth_headers(self) -> Dict[str, str]:
         """Generate correct WebSocket auth headers (PKCS1v15, ms timestamp)."""
-        private_key = serialization.load_pem_private_key(self.pk)
+        private_key = serialization.load_pem_private_key(self.pk.encode("utf-8"), password=None)
         
         timestamp = str(int(time.time() * 1000))  # Milliseconds!
         payload = timestamp + "GET" + "/trade-api/ws/v2"  # Exact payload for connect
@@ -162,7 +162,7 @@ if __name__ == "__main__":
     api_key, pk = load_credentials()
     client = KalshiClient(
         api_key=api_key,
-        private_key_path=pk
+        pk=pk
     )
     #client.on_update = on_price_update
     asyncio.run(client.start())
