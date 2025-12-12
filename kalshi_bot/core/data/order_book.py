@@ -71,7 +71,7 @@ class OrderBook:
         size = max(0, size)
 
         # Update cached total
-        self._total_bid_volume += size - old_size
+        self._total_ask_volume += size - old_size
         self._volume_version += 1
 
         if size <= 0:
@@ -97,6 +97,8 @@ class OrderBook:
 
         # NO bids = people buying NO → equivalent to selling YES → becomes YES asks
         for price_cents, size in snapshot.get("no", []):
+            import pdb
+            pdb.set_trace()
             if size > 0:
                 yes_price = 1.0 - (price_cents / 100.0)
                 self._add_ask(yes_price, size, ts)
