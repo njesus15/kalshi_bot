@@ -86,7 +86,6 @@ kalshi.pk
 *.log
 logs/
 kalshi_deltas/
-data/
 output/
 __temp__/
 
