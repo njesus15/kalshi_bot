@@ -17,6 +17,7 @@ from kalshi_bot.strategy.sweep import Sweep
 from kalshi_bot.util.util import get_signed_headers, get_nba_sport_markets
 from kalshi_bot.util.load_credential import load_credentials
 from kalshi_bot.util.logger import get_logger
+from kalshi_bot.monitor.heartbeat import heartbeat
 
 TARGET_TICKER = "KXNFLGAME-25DEC04DALDET-DET"
 
@@ -165,4 +166,12 @@ if __name__ == "__main__":
         pk=pk
     )
     #client.on_update = on_price_update
-    asyncio.run(client.start())
+
+    async def all_tasks():
+        # Start heartbeat in background
+        asyncio.create_task(heartbeat())
+
+        # Start your bot (websocket listener, etc.)
+        await client.start()
+
+    asyncio.run(all_tasks())
