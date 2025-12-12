@@ -97,8 +97,6 @@ class OrderBook:
 
         # NO bids = people buying NO → equivalent to selling YES → becomes YES asks
         for price_cents, size in snapshot.get("no", []):
-            import pdb
-            pdb.set_trace()
             if size > 0:
                 yes_price = 1.0 - (price_cents / 100.0)
                 self._add_ask(yes_price, size, ts)
