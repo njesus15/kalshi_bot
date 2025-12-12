@@ -22,4 +22,7 @@ COPY kalshi_bot/ ./kalshi_bot/
 # Install the package in editable mode — this is all you need
 RUN pip install -e .
 
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=10s \
+    CMD pgrep -f main.py > /dev/null || exit 1
+
 CMD ["python", "-m", "kalshi_bot.core.client"]
