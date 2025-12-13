@@ -67,7 +67,7 @@ class OrderBook:
         heapq.heappush(self.bids, PriceLevel(-price, price, size, ts))
 
     def _add_ask(self, price: float, size: int, ts: int):
-        old_size = self.bid_sizes.get(price, 0)
+        old_size = self.ask_sizes.get(price, 0)
         size = max(0, size)
 
         # Update cached total
