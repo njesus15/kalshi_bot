@@ -23,4 +23,4 @@ COPY kalshi_bot/ ./kalshi_bot/
 RUN pip install -e .
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 --start-period=10s \
-    CMD pgrep -f main.py > /dev/null || exit 1
+    CMD pgrep -f main.py > /dev/null || exit 1 
