@@ -128,8 +128,9 @@ class DeltaRecorder:
     # ————————————————————————
     async def log_delta(self, delta_msg: dict, seq: int, bbid: float, bask: float, mid: float, bid_vol: float, ask_vol: float, top_n):
 
+        dt = datetime.fromisoformat(delta_msg['ts'].replace("Z", "+00:00"))
         record: Dict[str, Any] = {
-            "ts": int(datetime.utcnow().timestamp() * 1000),
+            "ts": int(dt.timestamp() * 1000),
             "ticker": self.ticker,
             "seq": seq,
             "msg_type": "delta",
@@ -153,7 +154,6 @@ class DeltaRecorder:
             await self.queue.put(record)
 
     async def log_snapshot(self, seq: int, bbid: float, bask: float, mid: float, bid_vol: float, ask_vol: float, top_n):
-
         record: Dict[str, Any] = {
             "ts": int(datetime.utcnow().timestamp() * 1000),
             "ticker": self.ticker,
