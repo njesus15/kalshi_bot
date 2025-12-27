@@ -1,0 +1,10 @@
+{
+    "signal_query": "../sql/signal_test.sql",
+    "signal_db_file": "~/duckdb/",
+    "params": {
+        "threshold": 0.10,
+        "threshold2": 0.10,
+        "parquet_path": "~/kalshi-deltas",
+        "window": 10
+    }
+}
