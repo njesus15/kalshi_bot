@@ -5,8 +5,10 @@ import sys
 
 from kalshi_bot.util.logger import get_logger
 
+from pathlib import Path
 
-CONFIG_DIR = "../config"
+BASE_DIR = Path(__file__).resolve().parent
+CONFIG_DIR = BASE_DIR.parent / "config"
 
 
 logger = get_logger('signal_runner')
@@ -19,7 +21,7 @@ def get_configs():
     ]
 
 def main():
-    configs = get_configs(s)
+    configs = get_configs()
 
     if not configs:
         logger.info("No configs found!")
@@ -30,9 +32,10 @@ def main():
     for cfg in configs:
         cmd = [
             sys.executable,
-            "run_signal.py",
+            f"{BASE_DIR}/run_signal.py",
             "--config_path", cfg,
         ]
+        print("COMD", cmd)
         procs.append((cfg, subprocess.Popen(cmd)))
 
     for cfg, p in procs:
